@@ -12,6 +12,19 @@ function resetScore() {
   incorrect = 0;
 }
 
+function showNextQuestion(index) {
+  if (index < questions.length) {
+    document.querySelector('.next').addEventListener('click', function() {
+      document.getElementById('question-stem').textContent = questions[index].stem;
+      document.getElementById('choice-1').textContent = questions[index].choice1;
+      document.getElementById('choice-2').textContent = questions[index].choice2;
+      document.getElementById('choice-3').textContent = questions[index].choice3;
+      document.getElementById('choice-4').textContent = questions[index].choice4;
+      document.getElementById('message').textContent = '';
+    });
+  }
+}
+
 function getAnswer() {
   var choice;
   document.querySelector('.choice-1').addEventListener('click', function() {
