@@ -1,13 +1,14 @@
-var correct, incorrect, attempted;
+var correct, incorrect, attempted, questionAttempted;
 correct = 0;
 incorrect = 0;
 attempted = 0;
-
+questionAttempted = true;
 
 function resetScore() {
   document.getElementById('correct').textContent = 'Correct: ' + 0;
   document.getElementById('incorrect').textContent = 'Incorrect: ' + 0;
   document.getElementById('attempted').textContent = 'Attempted: ' + 0;
+  document.getElementById('message').textContent = '';
   correct = 0;
   incorrect = 0;
 }
@@ -21,8 +22,14 @@ function showNextQuestion(index) {
       document.getElementById('choice-3').textContent = questions[index].choice3;
       document.getElementById('choice-4').textContent = questions[index].choice4;
       document.getElementById('message').textContent = '';
+      questionAttempted = true;
     });
   }
+  else {
+    document.getElementById('message').textContent = 'You have seen all our questions. Come back soon for more!';
+    document.getElementById('next').style.display = 'none';
+  }
+
 }
 
 function getAnswer() {
@@ -50,6 +57,7 @@ function getAnswer() {
 }
 
 function checkAnswer(choice) {
+  if (questionAttempted) {
     if (attempted === 0) {
       correct += 1;
       attempted = correct + incorrect;
@@ -63,12 +71,20 @@ function checkAnswer(choice) {
     }
     questionAttempted = false;
     updateCounts();
+  }
+  else {
+    document.getElementById('message').textContent = 'You have already attempted this question!';
+  }
+  showNextQuestion(attempted-1);
 }
 
 function updateCounts() {
   document.getElementById('correct').textContent = 'Correct: ' + correct;
   document.getElementById('incorrect').textContent = 'Incorrect: ' + incorrect;
   document.getElementById('attempted').textContent = 'Attempted: ' + attempted;
+  if (correct === attempted && correct >= 3) {
+    document.getElementById('message').textContent = 'You are on a roll!';
+  }
 }
 
 var questions = [
