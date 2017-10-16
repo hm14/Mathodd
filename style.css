@@ -28,7 +28,6 @@ body {
     background-color: #b3ffed;
     border: solid;
     border-radius: 10px;
-    align-self: center;
 }
 
 .question-panel {
@@ -39,6 +38,7 @@ body {
 .score-panel {
   width: 40%;
   margin: 10px;
+  text-align: center;
 }
 
 button {
@@ -60,4 +60,31 @@ button {
 
 .message {
   color: red;
+}
+
+/* Media Queries */
+
+@media only screen and (min-width:300px) {
+	.question-panel, .score-panel {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width:640px) {
+  .question-panel, .score-panel {
+		width: 40%;
+    margin: 20px;
+	}
+}
+
+@media only screen and (min-width:820px) {
+	.container {
+        width: 820px;
+        margin-left: auto;
+        margin-right:auto;
+  }
+  .question-panel, .score-panel {
+    margin: 30px;
+  }
+
 }
